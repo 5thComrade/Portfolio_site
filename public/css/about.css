@@ -129,9 +129,6 @@ p {
     .lead {
         font-size: 1rem;
     }
-    .pos {
-        justify-content: start;
-    }
 }
 
 @keyframes html {
