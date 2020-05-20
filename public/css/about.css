@@ -43,6 +43,11 @@ body {
     opacity: 0.5;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 .btn-dark:hover {
     background-color: rgb(255,190,0);
     color: black;
