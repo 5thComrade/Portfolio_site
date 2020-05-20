@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Mono', monospace;
+}
+
+.yellow {
+    color: rgb(255,190,0);
+}
+
+.about-me {
+    background-color: rgb(255,190,0);
+    height: 100vh;
+}
+
+.skills {
+    background-color: #000000;
+    height: 100vh;
+    color: #ffffff;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+}
+
+.pos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-header {
+    font-size: 8.5rem;
+    margin: 0;
+    padding: 50px;
+    opacity: 0.5;
+}
+
+.btn-dark:hover {
+    background-color: rgb(255,190,0);
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: black;
+    color: rgb(255,190,0);
+}
+
+@media(max-width: 800px) {
+    .main-header {
+        font-size: 7rem;
+    }
+}
+
+@media(max-width: 500px) {
+    .main-header {
+        font-size: 5rem;
+    }
+}

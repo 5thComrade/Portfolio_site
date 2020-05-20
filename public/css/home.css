@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap');
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #000000;
+    color: #ffffff;
+    font-family: 'DM Mono', monospace;
+}
+
+section {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    right: 10%;
+}
+
+.btn:hover {
+    background-color: #000000;
+    color: rgb(255, 190, 0);
+}
+
+.txt-type {
+    border-right: 1px solid rgb(255, 190, 0);
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+@media(max-width: 800px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media(max-width: 500px) {
+    h1 {
+        font-size: 2rem;
+    }
+}

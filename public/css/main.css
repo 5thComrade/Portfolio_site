@@ -1,0 +1,15 @@
+.yellow {
+    color: rgb(255, 190, 0);
+}
+
+.navbar {
+    background-color: #000000!important;
+}
+
+.navbar-brand {
+    font-size: 22px;
+}
+
+.nav-link {
+    font-size: 20px;
+}
