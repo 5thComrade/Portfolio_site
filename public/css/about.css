@@ -38,7 +38,7 @@ body {
 }
 
 .main-header {
-    font-size: 8.5rem;
+    font-size: 10rem;
     margin: 0;
     padding: 50px;
     opacity: 0.5;
@@ -46,6 +46,10 @@ body {
 
 p {
     margin: 0;
+}
+
+.lead {
+    font-size: 2rem;
 }
 
 .bar {
@@ -109,15 +113,24 @@ p {
     color: rgb(255,190,0);
 }
 
-@media(max-width: 800px) {
+@media(max-width: 1040px) {
     .main-header {
         font-size: 7rem;
+    }
+    .lead {
+        font-size: 1.8rem;
     }
 }
 
 @media(max-width: 500px) {
     .main-header {
         font-size: 5rem;
+    }
+    .lead {
+        font-size: 1rem;
+    }
+    .pos {
+        justify-content: start;
     }
 }
 
