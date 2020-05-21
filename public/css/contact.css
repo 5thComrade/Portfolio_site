@@ -2,8 +2,45 @@
 
 body {
     margin: 0;
-    overflow: hidden;
     background: #000000;
     color: #ffffff;
     font-family: 'DM Mono', monospace;
+    box-sizing: border-box;
+}
+
+input {
+    background: #000000 !important;
+    color: rgb(255,190,0)!important;
+    border: none !important;
+    border-bottom: 1px solid rgb(255,190,0)!important;
+    padding: 20px !important;
+}
+
+.form-button {
+    display: block;
+    margin: 0 auto;
+}
+
+p.lead {
+    text-align: center;
+    font-size: 2rem;
+}
+
+ul {
+    padding: 0;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+    margin: 15px 20px;
+}
+
+a {
+    color: rgb(255,190,0);
+}
+
+a:hover {
+    color: #ffffff;
 }
