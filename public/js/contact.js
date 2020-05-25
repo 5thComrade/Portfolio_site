@@ -16,11 +16,19 @@ function formSubmitted(e) {
             message: message.value
         };
 
-        http.post('/contact', data);
-        ui.paint(`Hey ${name.value}, I am excited to get in touch with you!!`);
-        name.value = '';
-        email.value = '';
-        message.value = '';
+        http.post('/contact', data)
+        .then((res) => {
+            if(res === 201) {
+                ui.paint(`Hey ${name.value}, I am excited to get in touch with you!!`);
+                name.value = '';
+                email.value = '';
+                message.value = '';
+            } else if(res === 400) {
+                ui.paint('Please provide a valid email id.')
+            }
+        }).catch((err) => {
+            console.log(err)
+        })  
     }
 
     e.preventDefault();

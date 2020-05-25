@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+require('./db/mongoose');
+const Contact = require('./db/models/contact').contact;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,21 +31,17 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact', (req, res) => {
-    fs.readFile('./contacts.json', (err, data) => {
-        const arr = JSON.parse(data);
-        arr.push(req.body);
-        fs.writeFileSync('contacts.json', JSON.stringify(arr));
-    })
-    res.status(200).json({
-        message: 'Response registered...'
-    });
-})
+    const contact = new Contact(req.body);
 
-app.get('/antony', (req, res) => {
-    fs.readFile('./contacts.json', (err, data) => {
-        res.json(JSON.parse(data));
-    })
-})
+    contact.save()
+    .then(() => {
+        res.status(201).json({
+            message: "Response registered."
+        });
+    }).catch((err) => {
+        res.status(400).send(err.name);
+    });
+});
 
 app.get('/*', (req, res) => {
     res.render('404');
