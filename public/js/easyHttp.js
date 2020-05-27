@@ -1,15 +1,16 @@
 class EasyHttp {
-    post(url, data) {
-        return new Promise((resolve, reject) => {
-            fetch(url, {
+    async post(url, data) {
+        try {
+            const res = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             })
-            .then(res => resolve(res.status))
-            .catch(err => reject(err));
-        })  
+            return res.status;
+        } catch(err) {
+            throw new Error('Fetch API did not work')
+        }
     }
 }

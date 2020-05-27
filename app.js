@@ -30,17 +30,27 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-app.post('/contact', (req, res) => {
+app.post('/contact', async (req, res) => {
     const contact = new Contact(req.body);
-
-    contact.save()
-    .then(() => {
+    try {
+        await contact.save()
         res.status(201).json({
             message: "Response registered."
-        });
-    }).catch((err) => {
-        res.status(400).send(err.name);
-    });
+        })
+    } catch(err) {
+        res.status(400).json({
+            error: err.name
+        })
+    }
+
+    // contact.save()
+    // .then(() => {
+    //     res.status(201).json({
+    //         message: "Response registered."
+    //     });
+    // }).catch((err) => {
+    //     res.status(400).send(err.name);
+    // });
 });
 
 app.get('/*', (req, res) => {
