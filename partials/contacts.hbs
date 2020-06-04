@@ -1,0 +1,11 @@
+{{#if users}}
+    {{#each users}}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <p class="lead"> Name: {{this.name}}</p>
+                <p class="lead"> Email: {{this.email}}</p>
+                <p class="lead"> Message: {{this.message}}</p>
+            </li>
+        </ul>
+    {{/each}}
+{{/if}}

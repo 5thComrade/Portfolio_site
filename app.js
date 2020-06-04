@@ -1,9 +1,8 @@
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const cookieparser = require('cookie-parser');
 require('./db/mongoose');
-const Contact = require('./db/models/contact').contact;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,51 +10,14 @@ const port = process.env.PORT || 3000;
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, './partials'));
 
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './public')));
+app.use(cookieparser());
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
 
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
-app.get('/projects', (req, res) => {
-    res.render('projects');
-});
-
-app.get('/contact', (req, res) => {
-    res.render('contact');
-});
-
-app.post('/contact', async (req, res) => {
-    const contact = new Contact(req.body);
-    try {
-        await contact.save()
-        res.status(201).json({
-            message: "Response registered."
-        })
-    } catch(err) {
-        res.status(400).json({
-            error: err.name
-        })
-    }
-
-    // contact.save()
-    // .then(() => {
-    //     res.status(201).json({
-    //         message: "Response registered."
-    //     });
-    // }).catch((err) => {
-    //     res.status(400).send(err.name);
-    // });
-});
-
-app.get('/*', (req, res) => {
-    res.render('404');
-});
+app.use('/', require('./routes/allRoutes'));
+app.use(require('./middleware/auth'));
 
 app.listen(port, () => {
     console.log(`Server is up on Port: ${port}`);
