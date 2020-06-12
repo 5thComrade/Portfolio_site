@@ -69,7 +69,7 @@ router.post('/generateResume', auth, async (req, res) => {
             };
 
             const browser = await puppeteer.launch({
-                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                args: ['--no-sandbox'],
                 headless: false
             });
             const page = await browser.newPage();
