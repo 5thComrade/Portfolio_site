@@ -84,7 +84,7 @@ router.post('/generateResume', auth, async (req, res) => {
                 res.render('resume', { message: 'The resume is generated, ready for download'})
             }   
         })
-        .catch((err) => console.log('Something went wrong again'));
+        .catch((err) => console.log(err));
     } catch(e) {
         res.status(500).send('Something went wrong');
     }
