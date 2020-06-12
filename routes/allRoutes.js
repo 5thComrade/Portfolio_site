@@ -51,6 +51,7 @@ router.get('/resume', auth, async (req, res) => {
 
 router.post('/generateResume', auth, async (req, res) => {
     try {
+        (async () => {
             let data = {
                 message: req.body.message
             };
@@ -67,7 +68,10 @@ router.post('/generateResume', auth, async (req, res) => {
                 path: 'resume.pdf'
             };
 
-            const browser = await puppeteer.launch();
+            const browser = await puppeteer.launch({
+                args: ['--no-sandbox'],
+                headless: true
+            });
             const page = await browser.newPage();
             await page.goto(`data: text/html, ${finalHtml}`, {
                 waitUntil: 'networkidle0'
@@ -75,6 +79,7 @@ router.post('/generateResume', auth, async (req, res) => {
             await page.pdf(options);
             await browser.close();
             res.render('resume', { message: 'The resume is generated, ready for download'});
+        })();
     } catch(e) {
         res.status(500).send('Something went wrong');
     }
