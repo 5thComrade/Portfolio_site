@@ -70,7 +70,7 @@ router.post('/generateResume', auth, async (req, res) => {
 
             const browser = await puppeteer.launch({
                 args: ['--no-sandbox'],
-                headless: false
+                headless: true
             });
             const page = await browser.newPage();
             await page.goto(`data: text/html, ${finalHtml}`, {
