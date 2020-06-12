@@ -1,6 +1,10 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const router = new express.Router();
 const bcrypt = require('bcryptjs');
+const puppeteer = require('puppeteer');
+const hbs = require('hbs');
 const Contact = require('../db/models/contact').contact;
 const Admin = require('../db/models/admin');
 const auth = require('../middleware/auth');
@@ -33,6 +37,55 @@ router.get('/logout', auth, async (req, res) => {
         res.clearCookie('id');
         res.redirect('/login');
     } catch(err) {
+        res.status(500).send('Something went wrong');
+    }
+})
+
+router.get('/resume', auth, async (req, res) => {
+    try {
+        res.render('resume');
+    } catch(err) {
+        res.status(500).send('Something went wrong');
+    }
+})
+
+router.post('/generateResume', auth, async (req, res) => {
+    try {
+        (async () => {
+            let data = {
+                message: req.body.message
+            };
+            const templateHtml = fs.readFileSync(path.join(__dirname, '../resumeTemplate', 'resume.hbs'), 'utf8');
+            const template = hbs.compile(templateHtml);
+            const finalHtml = template(data);
+            const options = {
+                format: 'A4',
+                margin: {
+                    top: '40px',
+                    botton: '40px'
+                },
+                printBackground: true,
+                path: 'resume.pdf'
+            };
+
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto(`data: text/html, ${finalHtml}`, {
+                waitUntil: 'networkidle0'
+            });
+            await page.pdf(options);
+            await browser.close();
+            res.render('resume', { message: 'The resume is generated, ready for download'});
+        })();
+    } catch(e) {
+        res.status(500).send('Something went wrong');
+    }
+})
+
+router.get('/downloadResume', auth, async (req, res) => {
+    try {
+        res.download(path.join(__dirname, '../resume.pdf'));
+    } catch(e) {
         res.status(500).send('Something went wrong');
     }
 })
