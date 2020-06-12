@@ -78,8 +78,8 @@ router.post('/generateResume', auth, async (req, res) => {
             });
             await page.pdf(options);
             await browser.close();
-            res.render('resume', { message: 'The resume is generated, ready for download'});
-        })();
+        })().then((resolved) => res.render('resume', { message: 'The resume is generated, ready for download'}))
+        .catch((err) => console.log('Something went wrong'));
     } catch(e) {
         res.status(500).send('Something went wrong');
     }
