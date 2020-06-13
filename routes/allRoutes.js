@@ -60,10 +60,6 @@ router.post('/generateResume', auth, async (req, res) => {
             const finalHtml = template(data);
             const options = {
                 format: 'A4',
-                margin: {
-                    top: '40px',
-                    botton: '40px'
-                },
                 printBackground: true,
                 path: 'resume.pdf'
             };
