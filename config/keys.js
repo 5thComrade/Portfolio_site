@@ -1,7 +1,7 @@
 const keys = {
   mongoose:
-    "mongodb+srv://antony:ant123456@abl-3aejj.mongodb.net/website-contacts",
-  signature: "liveyoungwildandfree",
+    "enter your own connection url",
+  signature: "enter your own signature",
 };
 
 module.exports = keys;
