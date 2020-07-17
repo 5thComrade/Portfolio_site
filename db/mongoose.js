@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const keys = require("../config/keys");
 
-mongoose.connect('mongodb+srv://antony:ant123456@abl-3aejj.mongodb.net/website-contacts', {
-    useNewUrlParser: true, 
-    useCreateIndex: true,
-    useUnifiedTopology: true
+mongoose.connect(keys.mongoose, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
 });
